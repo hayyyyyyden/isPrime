@@ -13,8 +13,9 @@ if num < 1 {
 }
 
 var isPrime: Bool = true
+let max: Double = Double(num).squareRoot()
 if num > 2 {
-    for i in 2...num-1 {
+    for i in 2...Int(max) {
         if num % i == 0 {
             isPrime = false
             break
