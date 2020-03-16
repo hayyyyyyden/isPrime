@@ -16,15 +16,17 @@ if num < 1 {
 }
 
 var isPrime: Bool = true
+let timeNow = DispatchTime.now()
+
 let max: Double = Double(num).squareRoot()
-print(max)
-// check if num is odd or even
-if num % 2 == 0 {
+
+// check if num can be divided by 2 or 3
+if num % 2 == 0 || num % 3 == 0{
     isPrime = true
 } else {
-    for i in stride(from: 3, through: Int(max), by: 2) {
-        print(i)
-        if num % i == 0 {
+//    if not, then check only 6k+1 and 6k+5, because 6k+2,6k+3,6k+4 can all be divided by 2 or 3, thus filter out to speed up.
+    for i in stride(from: 5, through: Int(max), by: 6) {
+        if num % i == 0 || num % (i + 2) == 0 {
             isPrime = false
             break
         }
@@ -37,3 +39,7 @@ if (isPrime) {
 else {
     print("\(num) is not prime")
 }
+
+let timeEnd = DispatchTime.now()
+let timeElapsed = (timeEnd.rawValue - timeNow.rawValue) / 1000000000
+print("Elapsed time \(timeElapsed) secs.")
